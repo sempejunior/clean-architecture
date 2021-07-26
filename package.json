@@ -1,0 +1,29 @@
+{
+  "name": "clean-architecture-and-patterns",
+  "version": "1.0.0",
+  "description": "This project is created to study Clean Arquitecture andPatterns in the course withe Rodrigo Branas",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "tsc && jest dist/",
+    "tsc:init": "tsc --init"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sempejunior/clean-architecture-and-patterns-.git"
+  },
+  "author": "Carlos Sempé",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sempejunior/clean-architecture-and-patterns-/issues"
+  },
+  "homepage": "https://github.com/sempejunior/clean-architecture-and-patterns-#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "typescript": "^4.3.5"
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.24",
+    "jest": "^27.0.6"
+  }
+}
