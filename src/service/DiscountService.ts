@@ -18,6 +18,8 @@ export class DiscountService {
             return 10;
         } else if (coupon === "45678") {
             return 20;
+        } else {
+            return 0;
         }
     }
 
