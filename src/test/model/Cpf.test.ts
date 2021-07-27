@@ -1,4 +1,4 @@
-import { Cpf } from "../model/Cpf";
+import { Cpf } from "../../model/Cpf";
 
 test("Invalid Cpfs", function () {
     let cpf = new Cpf('000000000000');
