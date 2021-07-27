@@ -1,0 +1,116 @@
+{
+	"components": {
+		"examples": {},
+		"headers": {},
+		"parameters": {},
+		"requestBodies": {},
+		"responses": {},
+		"schemas": {
+			"IUser": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"cpf": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"name",
+					"cpf"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IProduct": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"price": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"name",
+					"description",
+					"price"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ICarrinho": {
+				"properties": {
+					"user": {
+						"$ref": "#/components/schemas/IUser"
+					},
+					"products": {
+						"items": {
+							"$ref": "#/components/schemas/IProduct"
+						},
+						"type": "array"
+					},
+					"discountCoupon": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"user",
+					"products",
+					"discountCoupon"
+				],
+				"type": "object",
+				"additionalProperties": false
+			}
+		},
+		"securitySchemes": {}
+	},
+	"info": {
+		"title": "clean-architecture-and-patterns",
+		"version": "1.0.0",
+		"description": "This project is created to study Clean Arquitecture andPatterns in the course withe Rodrigo Branas",
+		"license": {
+			"name": "ISC"
+		},
+		"contact": {
+			"name": "Carlos Sempé"
+		}
+	},
+	"openapi": "3.0.0",
+	"paths": {
+		"/v1/carrinho": {
+			"post": {
+				"operationId": "Comprar",
+				"responses": {
+					"200": {
+						"description": "Purchase made successfully"
+					}
+				},
+				"tags": [
+					"v1"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/ICarrinho"
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"servers": [
+		{
+			"url": "/"
+		}
+	]
+}

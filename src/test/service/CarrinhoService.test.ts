@@ -1,7 +1,6 @@
 import { CarrinhoService } from "../../service/CarrinhoService";
 import { ICarrinho } from "../../model/interfaces/ICarrinho";
 import { IUser } from "../../model/interfaces/IUser";
-import { Cpf } from "../../model/Cpf";
 import { IProduct } from "../../model/interfaces/IProduct"
 
 test("Invalid Cpfs", function () {
@@ -16,12 +15,10 @@ test("Invalid Cpfs", function () {
     }catch(error){
         expect(error.message).toBe("Cpf is invalid");
     }
-
-
 });
 
 function createMock() {
-    let cpf = new Cpf('01820762025');
+    let cpf = '01820762025';
 
     let product1 = {
         name: 'Product1',

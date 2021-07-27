@@ -1,9 +1,5 @@
-import {Cpf} from '../Cpf';
+export interface IUser {
 
-export interface IUser{
-
-    name : string;
-    cpf : Cpf;
-
-    
+    name: string;
+    cpf: string;
 }

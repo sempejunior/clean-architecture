@@ -1,0 +1,187 @@
+{
+	"components": {
+		"examples": {},
+		"headers": {},
+		"parameters": {},
+		"requestBodies": {},
+		"responses": {},
+		"schemas": {
+			"Cpf": {
+				"properties": {
+					"cpfNumber": {
+						"type": "string"
+					},
+					"FACTOR_DIGIT_1": {
+						"type": "number",
+						"enum": [
+							"10"
+						],
+						"nullable": false,
+						"default": 10
+					},
+					"FACTOR_DIGIT_2": {
+						"type": "number",
+						"enum": [
+							"11"
+						],
+						"nullable": false,
+						"default": 11
+					},
+					"MAX_DIGITS_1": {
+						"type": "number",
+						"enum": [
+							"9"
+						],
+						"nullable": false,
+						"default": 9
+					},
+					"MAX_DIGITS_2": {
+						"type": "number",
+						"enum": [
+							"10"
+						],
+						"nullable": false,
+						"default": 10
+					}
+				},
+				"required": [
+					"cpfNumber"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IUser": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"cpf": {
+						"$ref": "#/components/schemas/Cpf"
+					}
+				},
+				"required": [
+					"name",
+					"cpf"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IProduct": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"price": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"name",
+					"description",
+					"price"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ICarrinho": {
+				"properties": {
+					"id": {
+						"type": "string"
+					},
+					"user": {
+						"$ref": "#/components/schemas/IUser"
+					},
+					"products": {
+						"items": {
+							"$ref": "#/components/schemas/IProduct"
+						},
+						"type": "array"
+					},
+					"discountCoupon": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"id",
+					"user",
+					"products",
+					"discountCoupon"
+				],
+				"type": "object",
+				"additionalProperties": false
+			}
+		},
+		"securitySchemes": {}
+	},
+	"info": {
+		"title": "clean-architecture-and-patterns",
+		"version": "1.0.0",
+		"description": "This project is created to study Clean Arquitecture andPatterns in the course withe Rodrigo Branas",
+		"license": {
+			"name": "ISC"
+		},
+		"contact": {
+			"name": "Carlos Sempé"
+		}
+	},
+	"openapi": "3.0.0",
+	"paths": {
+		"/v1/loja": {
+			"post": {
+				"operationId": "Comprar",
+				"responses": {
+					"200": {
+						"description": "Purchase made successfully",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					},
+					"500": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"reason": {
+											"type": "string"
+										}
+									},
+									"required": [
+										"reason"
+									],
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"v1"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/ICarrinho"
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"servers": [
+		{
+			"url": "/"
+		}
+	]
+}

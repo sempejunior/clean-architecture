@@ -2,9 +2,10 @@
   "name": "clean-architecture-and-patterns",
   "version": "1.0.0",
   "description": "This project is created to study Clean Arquitecture andPatterns in the course withe Rodrigo Branas",
-  "main": "index.js",
+  "main": "dist/src/server.js",
   "scripts": {
-    "build": "tsc",
+    "build": "tsoa spec-and-routes && tsc",
+    "start": "node dist/server.js",
     "test": "tsc && jest dist/",
     "tsc:init": "tsc --init"
   },
@@ -19,6 +20,8 @@
   },
   "homepage": "https://github.com/sempejunior/clean-architecture-and-patterns-#readme",
   "dependencies": {
+    "axios": "^0.21.1",
+    "config": "^3.3.6",
     "express": "^4.17.1",
     "redis": "^3.1.2",
     "tsoa": "^3.8.0",

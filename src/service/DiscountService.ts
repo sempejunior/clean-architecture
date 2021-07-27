@@ -3,12 +3,15 @@ export class DiscountService {
 
     public applyDiscount(totalProducts: number, coupon: string): number {
 
-        const discount = this.getDiscountByCoupon(coupon);
-        return this.calculatePercentage(totalProducts, discount);
+        const percentageDiscount = this.getDiscountByCoupon(coupon);
+        console.log("percentageDiscount: " + percentageDiscount);
+        return this.calculatePercentage(totalProducts, percentageDiscount);
     }
 
     private calculatePercentage(totalProducts: number, percentage: number): number {
-        return (totalProducts / 100) * percentage;
+
+        const totalDiscount = (totalProducts / 100) * percentage;
+        return totalProducts - totalDiscount;
     }
 
 

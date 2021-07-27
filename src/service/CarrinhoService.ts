@@ -1,33 +1,52 @@
 import { ICarrinho } from "../model/interfaces/ICarrinho";
+import { IPurchase } from "../model/interfaces/IPurchase";
 import { IProduct } from "../model/interfaces/IProduct";
 import { DiscountService } from "../service/DiscountService"
-import { Cpf } from "../model/Cpf";
-import { v4 as uuidv4 } from 'uuid';
+import { CpfService } from "../service/CpfService";
+import { PurchaseRepository } from "../repositories/PurchaseRepository";
 
 export class CarrinhoService {
 
     discountService: DiscountService;
+    purchaseRepository :PurchaseRepository= new PurchaseRepository();
 
     constructor() {
         this.discountService = new DiscountService();
     }
 
-    public comprar(carrinho: ICarrinho): Promise<void> {
+    public async comprar(carrinho: ICarrinho): Promise<void> {
 
         this.validate(carrinho.user.cpf);
+        
+        console.log (carrinho);
 
         const totalWithouDiscount = this.calculateTotal(carrinho.products);
+        console.log ("totalWithouDiscount: " + totalWithouDiscount );
 
-        carrinho.id = uuidv4();
 
-        const totalWithDiscount = this.discountService.applyDiscount(carrinho.products.length, carrinho.discountCoupon);
+        const totalWithDiscount = this.discountService.applyDiscount(totalWithouDiscount, carrinho.discountCoupon);
+        console.log ("totalWithDiscount: " + totalWithDiscount );
+        let purchase = {
+            carrinho:  carrinho,
+            totalValue: totalWithouDiscount,
+            totalPaid: totalWithDiscount
+        } as IPurchase;
+
+        this.purchaseRepository.save(purchase);
+
+        console.log("Foi salvo");
+
+        let savedValues = await this.purchaseRepository.getList();
+
+        console.log("All values saved: " + savedValues);
 
         return Promise.resolve();
     }
 
-    private validate(cpf: Cpf) {
-        if (!cpf.validate()) {
-            console.log("Deu erro " + cpf.cpfNumber);
+    private validate(cpf: string) {
+        
+        if (!CpfService.validate(cpf)) {
+            console.log("Deu erro " + cpf);
             throw new Error('Cpf is invalid');
         }
     }

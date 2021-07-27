@@ -1,13 +1,10 @@
 export class RedisConfiguration {
 
     redis = require('redis');
-    client = this.redis.createClient('127.0.0.1', '6379');
+    client = this.redis.createClient({host: "localhost"
+        ,port: "6379",password:"Redis2019!"});
 
-    constructor(){
-        this.connectToRedis();
-    }
-
-    private connectToRedis() {
+    public connectToRedis() {
         this.client.on('connect', function () {
             console.log('Connected to Redis!');
         });
